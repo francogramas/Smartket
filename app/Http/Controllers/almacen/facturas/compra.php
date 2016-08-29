@@ -21,7 +21,7 @@ class compra extends Controller
      *
      * @return \Illuminate\Http\Responsereturn
      */
-    
+
     public function index()
     {
         $fecha=Carbon::now()->format('Y-m-d');
@@ -32,7 +32,7 @@ class compra extends Controller
             ->first();
 
         $terceros1 = terceros::select('id','nombres','apellido1','apellido2','nit')
-            ->where('id', '=', $factura_id{'id'})
+            ->where('id', '=', $factura_id{'tercero_id'})
             ->first();
 
         $facturaDetalles = facturaDetalle::select('facturadetalle.id','productos.nombre','productos.codigo','facturadetalle.lote','facturadetalle.costo','facturadetalle.valor','facturadetalle.cantidad','facturadetalle.stockMin','facturadetalle.vence')->
@@ -75,7 +75,7 @@ class compra extends Controller
             factura::create($request->all());
         }
 
-        $count1 = factura::where('tipo',2)->where('estado_id', 1)        
+        $count1 = factura::where('tipo',2)->where('estado_id', 1)
         ->count();
 
         if ($count1>0)
@@ -86,8 +86,8 @@ class compra extends Controller
             ->first();
             $request->request->add(['factura_id' => $factura_id{'id'}]);
             facturaDetalle::create($request->all());
-        }        
-        
+        }
+
         return redirect()->route('compra.index');
     }
 

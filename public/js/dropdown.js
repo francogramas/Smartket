@@ -1,12 +1,11 @@
 $(document).ready(function(){
-    
     $("#paises").change(function(event){
   		$.get("/departamentos/"+event.target.value+"", function(response,state){
   			$("#departamentos").empty();
   			for (i = 0; i < response.length; i++) {
   				$("#departamentos").append("<option value='" + response[i].id+ "'>" + response[i].name + "</option>")
-  			}  			
-  		});		
+  			}
+  		});
     });
 
      $("#departamentos").change(function(event){
@@ -15,8 +14,8 @@ $(document).ready(function(){
   			for (i = 0; i < response.length; i++) {
   				$("#ciudad").append("<option value='" + response[i].id+ "'>" + response[i].name + "</option>")
   			}
-  		});		
-    });	
+  		});
+    });
 
   $(function()
   {
@@ -27,6 +26,9 @@ $(document).ready(function(){
         $('#buscarP').val(ui.item.value);
         $('#producto_id').val(ui.item.id);
       }
+    });
+      $("#buscarP").click(function(){
+      $("#buscarP").val("");
     });
   });
 
@@ -39,6 +41,9 @@ $(document).ready(function(){
         $('#tercero_id').val(ui.item.id);
       }
     });
+     $("#buscarTercero").click(function(){
+      $("#buscarTercero").val("");
+    });
   });
 
   $('.btn-delete').click( function(e){
@@ -49,7 +54,7 @@ $(document).ready(function(){
 
     var url=form.attr('action').replace(':DETALLE_ID',id);
     var data=form.serialize();
-    
+
     $.post(url,data, function(result){
       row.fadeOut();
       alert(result);
