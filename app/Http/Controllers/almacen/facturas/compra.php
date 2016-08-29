@@ -28,7 +28,7 @@ class compra extends Controller
         $date=Carbon::now()->addYears(5)->format('Y-m-d');
 
         $factura_id =factura::where('tipo', 2)
-            ->whereIn('estado_id', [1, 2, 3])
+            ->whereIn('estado_id', [1])
             ->first();
 
         $terceros1 = terceros::select('id','nombres','apellido1','apellido2','nit')
@@ -67,7 +67,7 @@ class compra extends Controller
     public function store(Request $request)
     {
         $count = factura::where('tipo', 2)
-        ->whereIn('estado_id', [1, 2, 3])
+        ->whereIn('estado_id', [1])
         ->count();
 
         if ($count==0)

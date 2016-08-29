@@ -25,8 +25,8 @@ class venta extends Controller
         $fecha=Carbon::now()->format('Y-m-d');
         $date=Carbon::now()->addYears(5)->format('Y-m-d');
 
-        $factura_id =factura::where('tipo', 2)
-            ->whereIn('estado_id', [1, 2, 3])
+        $factura_id =factura::where('tipo', 1)
+            ->whereIn('estado_id', [1])
             ->first();
 
         $terceros1 = terceros::select('id','nombres','apellido1','apellido2','nit')
@@ -64,8 +64,8 @@ class venta extends Controller
      */
     public function store(Request $request)
     {
-        $count = factura::where('tipo', 2)
-        ->whereIn('estado_id', [1, 2, 3])
+        $count = factura::where('tipo', 1)
+        ->whereIn('estado_id', [1])
         ->count();
 
         if ($count==0)
@@ -73,7 +73,7 @@ class venta extends Controller
             factura::create($request->all());
         }
 
-        $count1 = factura::where('tipo',2)->where('estado_id', 1)        
+        $count1 = factura::where('tipo',2)->where('estado_id', 1)
         ->count();
 
         if ($count1>0)
@@ -84,8 +84,7 @@ class venta extends Controller
             ->first();
             $request->request->add(['factura_id' => $factura_id{'id'}]);
             facturaDetalle::create($request->all());
-        }        
-        
+        }
         return redirect()->route('venta.index');
     }
 
