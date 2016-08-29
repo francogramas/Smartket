@@ -28,10 +28,33 @@ $(document).ready(function(){
         $('#producto_id').val(ui.item.id);
       }
     });
+  });
 
-    $("#buscarP").click(function(){
-      $("#buscarP").val("");
-      $("#producto_id").val("0");
+  $(function() {
+     $("#buscarTercero").autocomplete({
+      source: "/buscar/tercero",
+      minLength: 1,
+      select: function(event, ui) {
+        $('#buscarTercero').val(ui.item.value);
+        $('#tercero_id').val(ui.item.id);
+      }
+    });
+  });
+
+  $('.btn-delete').click( function(e){
+    e.preventDefault();
+    var row = $(this).parents('tr');
+    var id=row.data('id');
+    var form = $('#form-delete');
+
+    var url=form.attr('action').replace(':DETALLE_ID',id);
+    var data=form.serialize();
+    
+    $.post(url,data, function(result){
+      row.fadeOut();
+      alert(result);
+    }).fail(function(){
+      alert('El registro no se pudo eliminar');
     });
   });
 });
