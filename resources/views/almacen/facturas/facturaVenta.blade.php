@@ -1,18 +1,40 @@
 @extends('layouts.dashboard')
-@section('page_heading','Inventario inicial')
+@section('page_heading','Factura de venta')
 @section('section')
-{!! Form::open(['route' => 'inicial.store','method'=>'POST']) !!}
 
-<div>
-	{!! Form::hidden('numero',0,['id'=>'numero']) !!}
-	{!! Form::hidden('prefijo','',['id'=>'prefijo']) !!}
-	{!! Form::hidden('tercero_id',1,['id'=>'tercero_id']) !!}
-	{!! Form::hidden('fecha',$dateActual,['id'=>'fecha']) !!}
-	{!! Form::hidden('tipo',6,['id'=>'tipo']) !!}
-	{!! Form::hidden('estado_id',1,['id'=>'estado_id']) !!}
+{!! Form::open(['route' => 'venta.store','method'=>'POST']) !!}
+
+<div class="row">
+	<div class="col-sm-4">
+		<div class="row">
+			<div class="col-sm-3">
+				<h5>Prefijo</h5>
+				{!! Form::text('prefijo',$factura_id->prefijo ,['id'=>'prefijo','class'=>'form-control','placeholder'=>'']) !!}
+			</div>
+			<div class="col-sm-3">
+				<h5>Numero</h5>
+				{!! Form::number('numero',$factura_id->numero,['id'=>'numero','required'=>'required','class'=>'form-control','placeholder'=>'']) !!}
+			</div>
+			<div class="col-sm-6">
+				<h5>Fecha</h5>
+				{!! Form::date('fecha',Carbon\Carbon::parse($factura_id->fecha)->format('Y-m-d'),['id'=>'fecha','required'=>'required','class'=>'form-control','placeholder'=>'']) !!}		
+			</div>
+			{!! Form::hidden('tipo',2,['id'=>'tipo']) !!}
+			{!! Form::hidden('estado_id',1,['id'=>'estado_id']) !!}
+		</div>
+	</div>
+	<div class="col-sm-8">
+		<div class="row">
+			<div class="col-sm-12">
+				<h5>Proveedor</h5>
+				{!! Form::hidden('tercero_id',$factura_id->tercero_id,['id'=>'tercero_id']) !!}
+				{!! Form::text('buscarTercero',$terceros1->nit.' || '.$terceros1->nombres.' '.$terceros1->apellido1.' '.$terceros1->apellido2,['id'=>'buscarTercero','required'=>'required','class'=>'form-control','placeholder'=>'Proveedor...']) !!}
+			</div>			
+		</div>
+	</div>
 </div>
-	
-</div>
+
+
 <div class="row">
 	<div class="col-sm-6">
 		<div class="row">
@@ -28,6 +50,7 @@
 			</div>
 		</div>
 	</div>
+	
 	<div class="col-sm-6">
 		<div class="row">
 			<div class="col-sm-3">
@@ -35,50 +58,32 @@
 				{!! Form::number('valor',null,['id'=>'valor','required'=>'required','class'=>'form-control','placeholder'=>'$0.00']) !!}
 			</div>
 			<div class="col-sm-3">
-				<h5>Costo</h5>
-				{!! Form::number('costo',null,['id'=>'costo','required'=>'required','class'=>'form-control','placeholder'=>'$0.00']) !!}
-			</div>
-			<div class="col-sm-3">
-				<h5>Stock Minimo</h5>
-				{!! Form::number('stockMin','1',['id'=>'stockMin','required'=>'required','class'=>'form-control','placeholder'=>'1']) !!}
-			</div>
-			<div class="col-sm-3">
 				<h5>Lote</h5>
 				{!! Form::text('lote','0000',['id'=>'lote','required'=>'required','class'=>'form-control','placeholder'=>'0000']) !!}
+			</div>
+			<div class="col-sm-3">
+				<h5>Stock</h5>
+				{!! Form::text('cantidad','0000',['id'=>'cantidad','required'=>'required','class'=>'form-control','placeholder'=>'0000']) !!}
 			</div>
 		</div>
 	</div>
 </div>
 <div class="row">
-	<div class="col-sm-2">
-		<h5>Vence</h5>
-		{!! Form::date('vence',$date,['id'=>'vence','required'=>'required','class'=>'form-control']) !!}
-	</div>
 	<div class="col-sm-1">
 		<h5><br></h5>
 		<button type="submit" class="btn btn-primary" name="agregar" >Agregar</button>
 	</div>
 	<div class="col-sm-1">
 		<h5><br></h5>
-		<a href={{ route('inicial.create') }} class="btn - btn-success"> Finalizar </a>
-		
+		<a href={{ route('inicial.create') }} class="btn - btn-success"> Finalizar </a>		
 	</div>
 	<div class="col-sm-1">
 		<h5><br></h5>
 		<button type="submit" class="btn btn-warning" name="posponer" formnovalidate="formnovalidate">Posponer</button>
 	</div>
-	<div class="col-sm-3">
-		
-	</div>
 	<div class="col-sm-2">
 		<h5>Valor Total</h5>
-	</div>
-	<div class="col-sm-1">
-		<h5>Costo Total</h5>
-	</div>
-	<div class="col-sm-1">
-		<h5>Utilidad Neta</h5>
-	</div>
+	</div>	
 </div>
 <div class="row">
 	<div class="col-sm-10">
@@ -117,7 +122,9 @@
 		</table>
 	</div>
 </div>
+
 {!! Form::close() !!}
+
 
 {!! Form::open(['route' => ['inicial.destroy',':DETALLE_ID'],'method'=>'DELETE', 'id'=>'form-delete' ]) !!}
 {!! Form::close() !!}

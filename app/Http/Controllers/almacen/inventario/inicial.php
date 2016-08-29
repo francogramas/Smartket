@@ -48,18 +48,11 @@ class inicial extends Controller
      */
     public function create()
     {
-            
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        /*$count = factura::where('tipo', 6)
+        $count = factura::where('tipo', 6)
         ->whereIn('estado_id', [1, 2, 3])
         ->count();
 
@@ -81,18 +74,11 @@ class inicial extends Controller
             facturaDetalle::create($request->all());
         }        
         
-        return redirect()->route('inventario.inicial.index');*/
-        if ($request->has('Agregar')) {
-            return ('Hola');
-    //
-        }
-        else
-        {
-            return ('No Hola');
-
-        }    
+        return redirect()->route('inicial.index');
     }
 
+
+    
     /**
      * Display the specified resource.
      *
@@ -133,8 +119,16 @@ class inicial extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy($id,Request $request)
+    { 
+         
+
+        $facturaDetalle = facturaDetalle::FindOrFail($id);
+        $facturaDetalle->delete();
+     
+        if($request->ajax()){
+            return('el registro fue Eliminado');
+        }
+        return redirect()->route('inicial.index');
     }
 }

@@ -246,24 +246,21 @@
                         <li >
                             <a href="#"><i class="fa fa-shopping-cart fa-fw"></i> Facturas<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
-                                    <a href="{{ url ('panels') }}">Venta</a>
+                                <li {{ (Request::is('*venta') ? 'class="active"' : '') }}>
+                                    <a href="{{ url ('facturas/venta') }}">Venta</a>
                                 </li>
                                 <li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
-                                    <a href="{{ url ('buttons' ) }}">Compra</a>
+                                    <a href="{{ url ('facturas/compra' ) }}">Compra</a>
                                 </li>
                                 <li {{ (Request::is('*notifications') ? 'class="active"' : '') }}>
-                                    <a href="{{ url('notifications') }}">Cotizaciones</a>
+                                    <a href="{{ url('facturas/cotizaciones') }}">Cotizaciones</a>
                                 </li>
                                 <li {{ (Request::is('*typography') ? 'class="active"' : '') }}>
-                                    <a href="{{ url ('typography') }}">Pedidos</a>
+                                    <a href="{{ url ('facturas/pedidos') }}">Pedidos</a>
                                 </li>
                                 <li {{ (Request::is('*icons') ? 'class="active"' : '') }}>
-                                    <a href="{{ url ('icons') }}"> Icons</a>
-                                </li>
-                                <li {{ (Request::is('*grid') ? 'class="active"' : '') }}>
-                                    <a href="{{ url ('grid') }}">Grid</a>
-                                </li>
+                                    <a href="{{ url ('facturas/devoluciones') }}"> Devoluciones</a>
+                                </li>                                
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>

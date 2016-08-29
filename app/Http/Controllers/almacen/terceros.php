@@ -31,6 +31,22 @@ class terceros extends Controller
         return View('/almacen/terceros/admin')->with('pais1',$pais1)->with('terceros',$terceros);
     }
 
+    public function autocomplete( Request $request){
+        $term = $request->input('term');
+        $results = array();
+        $queries = \SmartKet\models\almacen\terceros::select('id','nombres','apellido1','apellido2','nit')
+            ->where('nombres', 'LIKE', '%'.$term.'%')
+            ->orWhere('nit', 'LIKE', '%'.$term.'%')
+            ->orWhere('apellido1', 'LIKE', '%'.$term.'%')
+            ->orWhere('apellido2', 'LIKE', '%'.$term.'%')
+            ->take(5)->get();
+        foreach ($queries as $query)
+        {
+            $results[] = [ 'id' => $query->id, 'value' => $query->nit.' || '.$query->nombres.' '.$query->apellido1.' '.$query->apellido2  ];
+        }
+        return Response()->json($results);
+    }
+
 
     public function create()
     {

@@ -6,17 +6,46 @@ use Illuminate\Http\Request;
 
 use SmartKet\Http\Requests;
 use SmartKet\Http\Controllers\Controller;
+use Carbon\Carbon;
+use \SmartKet\models\almacen\facturas\factura;
+use \SmartKet\models\almacen\facturas\facturaDetalle;
+use SmartKet\models\almacen\productos\productos;
+use SmartKet\models\almacen\terceros;
+
+
 
 class compra extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Responsereturn
      */
+    
     public function index()
     {
-        //
+        $fecha=Carbon::now()->format('Y-m-d');
+        $date=Carbon::now()->addYears(5)->format('Y-m-d');
+
+        $factura_id =factura::where('tipo', 2)
+            ->whereIn('estado_id', [1, 2, 3])
+            ->first();
+
+        $terceros1 = terceros::select('id','nombres','apellido1','apellido2','nit')
+            ->where('id', '=', $factura_id{'id'})
+            ->first();
+
+        $facturaDetalles = facturaDetalle::select('facturadetalle.id','productos.nombre','productos.codigo','facturadetalle.lote','facturadetalle.costo','facturadetalle.valor','facturadetalle.cantidad','facturadetalle.stockMin','facturadetalle.vence')->
+            join('productos','productos.id','=','facturadetalle.producto_id')->
+            where('facturadetalle.factura_id',$factura_id{'id'})->
+            get();
+
+        return View('almacen/facturas/facturaCompra')
+        ->with('date',$date)
+        ->with('fecha',$fecha)
+        ->with('facturaDetalles',$facturaDetalles)
+        ->with('factura_id',$factura_id)
+        ->with('terceros1',$terceros1);
     }
 
     /**
@@ -37,7 +66,29 @@ class compra extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $count = factura::where('tipo', 2)
+        ->whereIn('estado_id', [1, 2, 3])
+        ->count();
+
+        if ($count==0)
+        {
+            factura::create($request->all());
+        }
+
+        $count1 = factura::where('tipo',2)->where('estado_id', 1)        
+        ->count();
+
+        if ($count1>0)
+        {
+            $factura_id =factura::select('id')
+            ->where('tipo', 2)
+            ->whereIn('estado_id', [1, 2, 3])
+            ->first();
+            $request->request->add(['factura_id' => $factura_id{'id'}]);
+            facturaDetalle::create($request->all());
+        }        
+        
+        return redirect()->route('compra.index');
     }
 
     /**
