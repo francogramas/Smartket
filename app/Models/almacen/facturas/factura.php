@@ -25,6 +25,6 @@ class factura extends Model
 
 	public function tipo(){
 		return $this -> hasmany(tipo::class);
-	}	
+	}
 
 }

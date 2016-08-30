@@ -253,14 +253,14 @@
                                     <a href="{{ url ('facturas/compra' ) }}">Compra</a>
                                 </li>
                                 <li {{ (Request::is('*notifications') ? 'class="active"' : '') }}>
-                                    <a href="{{ url('facturas/cotizaciones') }}">Cotizaciones</a>
+                                    <a href="{{ url('facturas/cotizacion') }}">Cotizaciones</a>
                                 </li>
                                 <li {{ (Request::is('*typography') ? 'class="active"' : '') }}>
-                                    <a href="{{ url ('facturas/pedidos') }}">Pedidos</a>
+                                    <a href="{{ url ('facturas/pedido') }}">Pedidos</a>
                                 </li>
                                 <li {{ (Request::is('*icons') ? 'class="active"' : '') }}>
                                     <a href="{{ url ('facturas/devoluciones') }}"> Devoluciones</a>
-                                </li>                                
+                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>

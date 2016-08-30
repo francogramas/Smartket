@@ -1,9 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFacturadetalleTable extends Migration
+class CreateInventarioTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,20 +13,19 @@ class CreateFacturadetalleTable extends Migration
      */
     public function up()
     {
-        Schema::create('Facturadetalle', function(Blueprint $table)
+        Schema::create('inventario', function(Blueprint $table)
         {
             $table->increments('id');
-            $table->integer('factura_id')->unsigned()->index();
-            $table->integer('cantidad')->unsigned();
             $table->integer('producto_id')->unsigned()->index();
-            $table->string('lote');
-            $table->double('costo')->default('0'));
+            $table->integer('cantidad')->unsigned();
+            $table->double('costo')->default('0');
             $table->double('valor')->default('0');
-            $table->integer('stockMin')->unsigned()->default('1');
+            $table->integer('stock')->unsigned()->default('0');
+            $table->integer('stockmin')->unsigned()->default('1');
+            $table->string('lote')->default('0');
             $table->timestamp('vence');
             $table->timestamps();
 
-            $table->foreign('factura_id')->references('id')->on('factura');
             $table->foreign('producto_id')->references('id')->on('productos');
 
         });
@@ -38,6 +38,6 @@ class CreateFacturadetalleTable extends Migration
      */
     public function down()
     {
-        Schema::drop('Facturadetalle');
+        Schema::drop('inventario');
     }
 }

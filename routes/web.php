@@ -30,15 +30,15 @@ Route::get('/departamentos/{id}','general\estadosController@getEstados');
 Route::get('/ciudades/{id}','general\ciudadesController@getCiudades');
 // inventario inicial
 Route::resource('/inventario/inicial','almacen\inventario\inicial');
-//facturas de venta 
+//facturas de venta
 Route::resource('/facturas/venta','almacen\facturas\venta');
-//facturas de compra 
+//facturas de compra
 Route::resource('/facturas/compra','almacen\facturas\compra');
-//facturas de Cotizacion 
+//facturas de Cotizacion
 Route::resource('/facturas/cotizacion','almacen\facturas\cotizacion');
-//facturas de pedidos 
+//facturas de pedidos
 Route::resource('/facturas/pedido','almacen\facturas\pedido');
-//facturas de pedidos 
+//facturas de pedidos
 Route::resource('/facturas/devolucion','almacen\facturas\devolucion');
 
 

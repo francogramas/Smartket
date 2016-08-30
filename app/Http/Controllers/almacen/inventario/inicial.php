@@ -48,7 +48,7 @@ class inicial extends Controller
      */
     public function create()
     {
-              
+
     }
 
     public function store(Request $request)
@@ -62,7 +62,7 @@ class inicial extends Controller
             factura::create($request->all());
         }
 
-        $count1 = factura::where('tipo',6)->where('estado_id', 1)        
+        $count1 = factura::where('tipo',6)->where('estado_id', 1)
         ->count();
 
         if ($count1>0)
@@ -73,13 +73,12 @@ class inicial extends Controller
             ->first();
             $request->request->add(['factura_id' => $factura_id{'id'}]);
             facturaDetalle::create($request->all());
-        }        
-        
+        }
         return redirect()->route('inicial.index');
     }
 
 
-    
+
     /**
      * Display the specified resource.
      *
@@ -121,12 +120,10 @@ class inicial extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id,Request $request)
-    { 
-         
+    {
 
         $facturaDetalle = facturaDetalle::FindOrFail($id);
         $facturaDetalle->delete();
-     
         if($request->ajax()){
             return('el registro fue Eliminado');
         }
