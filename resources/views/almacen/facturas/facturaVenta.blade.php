@@ -13,13 +13,13 @@
 			</div>
 			<div class="col-sm-3">
 				<h5>Numero</h5>
-				{!! Form::number('numero',$factura_id{'numero'},['id'=>'numero','required'=>'required','class'=>'form-control','placeholder'=>'']) !!}
+				{!! Form::label($factura_id{'numero'},null,['id'=>'numero','class'=>'form-control']) !!}
 			</div>
 			<div class="col-sm-6">
 				<h5>Fecha</h5>
 				{!! Form::date('fecha',Carbon\Carbon::parse($factura_id{'fecha'})->format('Y-m-d'),['id'=>'fecha','required'=>'required','class'=>'form-control','placeholder'=>'']) !!}
 			</div>
-			{!! Form::hidden('tipo',2,['id'=>'tipo']) !!}
+			{!! Form::hidden('tipo',1,['id'=>'tipo']) !!}
 			{!! Form::hidden('estado_id',1,['id'=>'estado_id']) !!}
 		</div>
 	</div>
@@ -60,7 +60,7 @@
 			</div>
 			<div class="col-sm-3">
 				<h5>Stock</h5>
-				{!! Form::text('cantidad','0000',['id'=>'cantidad','required'=>'required','class'=>'form-control','placeholder'=>'0000']) !!}
+				{!! Form::text('stock','1',['id'=>'stock','required'=>'required','class'=>'form-control','placeholder'=>'0000']) !!}
 			</div>
 		</div>
 	</div>
@@ -91,10 +91,7 @@
 					<td>Cantidad</td>
 					<td>Código</td>
 					<td>Prodcuto</td>
-					<td>Lote</td>
-					<td>Vence</td>
-					<td>Costo</td>
-					<td>Costo Total</td>
+					<td>Lote</td>									
 					<td>Valor</td>
 					<td>Valor total</td>
 					<td></td>
@@ -106,10 +103,7 @@
 						<td> {{ $facturaDetalle->cantidad }} </td>
 						<td> {{ $facturaDetalle->codigo }} </td>
 						<td> {{ $facturaDetalle->nombre }} </td>
-						<td> {{ $facturaDetalle->lote }} </td>
-						<td> {{ Carbon\Carbon::parse($facturaDetalle->vence)->format('d-m-Y') }} </td>
-						<td> {{ '$ '.number_format(($facturaDetalle->costo),2, '.', ',') }} </td>
-						<td> {{ '$ '.number_format((($facturaDetalle->costo)*($facturaDetalle->cantidad)),2, '.', ',') }} </td>
+						<td> {{ $facturaDetalle->lote }} </td>																		
 						<td> {{ '$ '.number_format(($facturaDetalle->valor),2, '.', ',') }} </td>
 						<td> {{ '$ '.number_format((($facturaDetalle->valor)*($facturaDetalle->cantidad)),2, '.', ',') }} </td>	
 						<td><a href= "#" class="btn-delete" >[Eliminar]</a></td>

@@ -19,9 +19,9 @@ class CreateFacturadetalleTable extends Migration
             $table->integer('cantidad')->unsigned();
             $table->integer('producto_id')->unsigned()->index();
             $table->string('lote');            
-            $table->double('costo');
-            $table->double('valor');
-            $table->integer('stockMin')->unsigned();
+            $table->double('costo')->default('0'));
+            $table->double('valor')->default('0');
+            $table->integer('stockMin')->unsigned()->default('1');
             $table->timestamp('vence');
             $table->timestamps();
             

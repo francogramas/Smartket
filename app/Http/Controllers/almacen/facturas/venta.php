@@ -73,14 +73,14 @@ class venta extends Controller
             factura::create($request->all());
         }
 
-        $count1 = factura::where('tipo',2)->where('estado_id', 1)
+        $count1 = factura::where('tipo',1)->where('estado_id', 1)
         ->count();
 
         if ($count1>0)
         {
             $factura_id =factura::select('id')
-            ->where('tipo', 2)
-            ->whereIn('estado_id', [1, 2, 3])
+            ->where('tipo', 1)
+            ->whereIn('estado_id', [1])
             ->first();
             $request->request->add(['factura_id' => $factura_id{'id'}]);
             facturaDetalle::create($request->all());
