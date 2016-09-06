@@ -26,7 +26,7 @@ class pedido extends Controller
         $date=Carbon::now()->addYears(5)->format('Y-m-d');
 
         $factura_id =factura::where('tipo', 4)
-            ->whereIn('estado_id', [1])
+            ->where('estado_id', 1)
             ->first();
 
         $terceros1 = terceros::select('id','nombres','apellido1','apellido2','nit')
@@ -65,7 +65,7 @@ class pedido extends Controller
     public function store(Request $request)
     {
          $count = factura::where('tipo', 4)
-        ->whereIn('estado_id', [1])
+        ->where('estado_id', 1)
         ->count();
 
         if ($count==0)
@@ -73,14 +73,14 @@ class pedido extends Controller
             factura::create($request->all());
         }
 
-        $count1 = factura::where('tipo',1)->where('estado_id', 1)
+        $count1 = factura::where('tipo',4)->where('estado_id', 1)
         ->count();
 
         if ($count1>0)
         {
             $factura_id =factura::select('id')
             ->where('tipo', 4)
-            ->whereIn('estado_id', [1])
+            ->where('estado_id', 1)
             ->first();
             $request->request->add(['factura_id' => $factura_id{'id'}]);
             facturaDetalle::create($request->all());

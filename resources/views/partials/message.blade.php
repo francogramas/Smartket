@@ -26,3 +26,9 @@
 		<strong>{!! Session::get('delete') !!} </strong>
 	</div>
 @endif
+
+@if(Session::has('inicial'))
+	<div class="alert alert-warning" rol="alert">
+		<strong>{!! Session::get('inicial') !!} </strong>
+	</div>
+@endif

@@ -23,6 +23,8 @@ Route::get('buscar/producto', 'almacen\productosController@autocomplete');
 // End  Controladores de almacen
 // Buscar Terceros
 Route::get('buscar/tercero', 'almacen\terceros@autocomplete');
+// Empresa
+Route::resource('/empresa','general\empresaController');
 
 // ---------------------- Controladores generales
 Route::resource('/pais','general\pais');
@@ -30,6 +32,12 @@ Route::get('/departamentos/{id}','general\estadosController@getEstados');
 Route::get('/ciudades/{id}','general\ciudadesController@getCiudades');
 // inventario inicial
 Route::resource('/inventario/inicial','almacen\inventario\inicial');
+
+Route::get('/inventario/inicialprint', function()
+{
+	return View::make('almacen/inventario/inventarioInicialprint');
+});
+
 //facturas de venta
 Route::resource('/facturas/venta','almacen\facturas\venta');
 //facturas de compra

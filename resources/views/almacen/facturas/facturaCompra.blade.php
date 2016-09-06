@@ -49,14 +49,14 @@
 		</div>
 	</div>
 	<div class="col-sm-6">
-		<div class="row">
-			<div class="col-sm-3">
-				<h5>Costo</h5>
-				{!! Form::number('costo',null,['id'=>'costo','required'=>'required','class'=>'form-control','placeholder'=>'$0.00']) !!}
-			</div>
+		<div class="row">			
 			<div class="col-sm-3">
 				<h5>Valor</h5>
 				{!! Form::number('valor',null,['id'=>'valor','required'=>'required','class'=>'form-control','placeholder'=>'$0.00']) !!}
+			</div>
+			<div class="col-sm-3">
+				<h5>Costo</h5>
+				{!! Form::number('costo',null,['id'=>'costo','required'=>'required','class'=>'form-control','placeholder'=>'$0.00']) !!}
 			</div>
 			<div class="col-sm-3">
 				<h5>Stock Minimo</h5>
@@ -76,26 +76,41 @@
 	</div>
 	<div class="col-sm-1">
 		<h5><br></h5>
-		<button type="submit" class="btn btn-primary" name="agregar" >Agregar</button>
+		<button type="submit" class="btn btn-primary" name="agregar" > Agregar </button>
 	</div>
 	<div class="col-sm-1">
 		<h5><br></h5>
-		<a href={{ route('inicial.create') }} class="btn - btn-success"> Finalizar </a>
+		<a href={{ route('compra.create') }} class="btn - btn-success"> Finalizar </a>
 	</div>
 	<div class="col-sm-1">
 		<h5><br></h5>
-		<button type="submit" class="btn btn-warning" name="posponer" formnovalidate="formnovalidate">Posponer</button>
+		<button type="submit" class="btn btn-warning" name="posponer" formnovalidate="formnovalidate"> Posponer </button>
+	</div>
+	<div class="col-sm-1">
+		<h5><br></h5>
+		<a href={{ route('compra.create') }} class="btn - btn-danger"> Cancelar </a>
 	</div>
 	<div class="col-sm-3">
 	</div>
-	<div class="col-sm-2">
-		<h5>Valor Total</h5>
-	</div>
-	<div class="col-sm-1">
-		<h5>Costo Total</h5>
-	</div>
-	<div class="col-sm-1">
-		<h5>Utilidad Neta</h5>
+	<div class="col-sm-3">
+		<table class="table">
+			<thead>
+				<tr>
+					<td><h5><b>Valor Neto</b> </h5></td>
+					<td><h5><b>Costo Neto</b> </h5</td>
+					<td><h5><b>Utilidad Neta</b> </h5</td>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach ($totales as $total)
+					<tr>
+						<td> {{ '$ '.number_format(($total->valorTotal),2, '.', ',') }}</td>
+						<td> {{ '$ '.number_format(($total->costoTotal),2, '.', ',') }}</td>
+						<td> {{ '$ '.number_format(($total->UtilidadNeta),2, '.', ',') }}</td>													
+					</tr>
+				@endforeach				
+			</tbody>
+		</table>
 	</div>
 </div>
 <div class="row">
