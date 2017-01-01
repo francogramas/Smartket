@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
-@section('page_heading','Administración de Terceros')
+@section('page_heading','Terceros')
 @section('section')
 
 {!! Form::open(['route' => 'terceros.store','method'=>'POST']) !!}

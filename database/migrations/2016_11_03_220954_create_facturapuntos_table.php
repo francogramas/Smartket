@@ -1,9 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFacturaTable extends Migration
+class CreateFacturapuntosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +13,7 @@ class CreateFacturaTable extends Migration
      */
     public function up()
     {
-         Schema::create('factura', function(Blueprint $table)
+           Schema::create('facturapuntos', function(Blueprint $table)
         {
     
             $table->increments('id');
@@ -22,6 +23,7 @@ class CreateFacturaTable extends Migration
             $table->timestamp('fecha');
             $table->integer('tipo')->unsigned()->index();
             $table->integer('estado_id')->unsigned()->index();
+            $table->double('valor');
 
             $table->timestamps();
             
@@ -38,6 +40,6 @@ class CreateFacturaTable extends Migration
      */
     public function down()
     {
-        Schema::drop('factura');
+        Schema::drop('facturapuntos');
     }
 }
