@@ -40,6 +40,7 @@
 				                    <li><a href="#">Kardex de un producto</a></li>
 				                    <li><a href="#">Consolidado historico de ventas</a></li>				                    
 				                    <li><a href="#">Ajustes de inventario</a></li>				                    
+				                    <li><a href="/inventario/inicial">Inventario Inicial</a></li>				                    
 				                </ul>
 				             </div>	
 				        </div>

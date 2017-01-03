@@ -1,5 +1,4 @@
 <?php
-
 namespace SmartKet\Http\Controllers\almacen\inventario;
 
 use Illuminate\Http\Request;
@@ -13,14 +12,9 @@ use SmartKet\models\almacen\productos\productos;
 use DB;
 use Session;
 
-
 class inicial extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+//--------------------------------------------------------------------------------------
     public function index()
     {
         //
@@ -30,7 +24,11 @@ class inicial extends Controller
         ->count();
 
         if ($count>0) {
-            Session::flash('inicial','Ya existe un inventario inicial');            
+            Session::flash('inicial','Ya existe un inventario inicial');   
+            $visible='hidden';
+        }
+        else {
+            $visible='visible';  
         }
 
         $dateActual=Carbon::now()->format('Y-m-d');
@@ -54,19 +52,16 @@ class inicial extends Controller
         return View('almacen/inventario/inventarioInicial')
         ->with('date',$date)
         ->with('dateActual',$dateActual)
+        ->with('visible',$visible)
         ->with('facturaDetalles',$facturaDetalles)
-        ->with('totales',$totales->toArray());  
-
+        ->with('totales',$totales->toArray());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+//--------------------------------------------------------------------------------------
     public function create()
     {
         // esta funcion finaliza la factura y lleva todos los datos de la factura al inventario
+        
         $count = factura::where('tipo', 6)
         ->where('estado_id', 1)
         ->count();
@@ -80,8 +75,10 @@ class inicial extends Controller
             DB::statement('call fact2invent('.$factura_id{'id'}.');');
         }
         return redirect()->route('inicial.index');
+        
     }
 
+//--------------------------------------------------------------------------------------
     public function store(Request $request)
     {
          $count1 = factura::where('tipo', 6)
@@ -113,49 +110,23 @@ class inicial extends Controller
         }
         return redirect()->route('inicial.index');
     }
-
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+//--------------------------------------------------------------------------------------
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+//--------------------------------------------------------------------------------------
     public function edit($id)
     {
         //
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+//--------------------------------------------------------------------------------------
     public function update(Request $request, $id)
     {
         //
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+//--------------------------------------------------------------------------------------
     public function destroy($id,Request $request)
     {
 

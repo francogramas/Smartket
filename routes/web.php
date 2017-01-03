@@ -55,12 +55,22 @@ Route::group(['middleware' => 'auth'], function () {
 		return View::make('almacen/inventario/agotados');
 	});
 
+	// inventario inicial
+	Route::resource('/inventario/inicial','almacen\inventario\inicial');
+
+	Route::get('/inventario/inicialprint', function()
+	{
+		return View::make('almacen/inventario/inventarioInicialprint');
+	});
+
 });
 
 
 
 // Buscar Producto
 Route::get('buscar/producto', 'almacen\productosController@autocomplete');
+Route::get('buscar/productoInventario', 'almacen\productosController@autocompleteInventario');
+Route::get('buscar/productoVenta', 'almacen\productosController@autocompleteInventario');
 // End  Controladores de almacen
 // Buscar Terceros
 Route::get('buscar/tercero', 'almacen\terceros@autocomplete');
@@ -72,13 +82,7 @@ Route::resource('/empresa','general\empresaController');
 Route::resource('/pais','general\pais');
 Route::get('/departamentos/{id}','general\estadosController@getEstados');
 Route::get('/ciudades/{id}','general\ciudadesController@getCiudades');
-// inventario inicial
-Route::resource('/inventario/inicial','almacen\inventario\inicial');
 
-Route::get('/inventario/inicialprint', function()
-{
-	return View::make('almacen/inventario/inventarioInicialprint');
-});
 
 
 // --------------------------------------------------------------------------

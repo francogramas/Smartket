@@ -11,26 +11,24 @@ use \SmartKet\models\almacen\facturas\factura;
 use \SmartKet\models\almacen\facturas\facturaDetalle;
 use SmartKet\models\almacen\productos\productos;
 use SmartKet\models\almacen\terceros;
+use DB;
+use Auth;
 
 
 class venta extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $fecha=Carbon::now()->format('Y-m-d');
         $date=Carbon::now()->addYears(5)->format('Y-m-d');
+        $aut=Auth::id();
 
         $factura_id =factura::where('tipo', 1)
             ->whereIn('estado_id', [1])
             ->first();
 
         $terceros1 = terceros::select('id','nombres','apellido1','apellido2','nit')
-            ->where('id', '=', $factura_id{'id'})
+            ->where('id', '=', $factura_id{'tercero_id'})
             ->first();
 
         $facturaDetalles = facturaDetalle::select('facturadetalle.id','productos.nombre','productos.codigo','facturadetalle.lote','facturadetalle.costo','facturadetalle.valor','facturadetalle.cantidad','facturadetalle.stockMin','facturadetalle.vence')->
@@ -38,11 +36,18 @@ class venta extends Controller
             where('facturadetalle.factura_id',$factura_id{'id'})->
             get();
 
+        $totales=DB::table('facturadetalle')
+        ->select(DB::raw('sum(cantidad*costo) as costoTotal, sum(cantidad*valor) as valorTotal, sum(cantidad*valor)-sum(cantidad*costo) UtilidadNeta'))
+        ->where('facturadetalle.factura_id','=',$factura_id{'id'})
+        ->first();
+
         return View('almacen/facturas/facturaVenta')
         ->with('date',$date)
         ->with('fecha',$fecha)
         ->with('facturaDetalles',$facturaDetalles)
         ->with('factura_id',$factura_id)
+        ->with('totales',$totales)
+        ->with('aut',$aut)
         ->with('terceros1',$terceros1);
     }
 
@@ -53,7 +58,23 @@ class venta extends Controller
      */
     public function create()
     {
-        //
+        // esta funcion finaliza la factura y lleva todos los datos de la factura al inventario
+        
+        $count = factura::where('tipo', 1)
+        ->where('estado_id', 1)
+        ->where('users_id',Auth::user())
+        ->count();
+
+        if ($count>0)
+        {
+            $factura_id =factura::select('id')
+            ->where('tipo', 6)
+            ->where('estado_id', 1)
+            ->where('users_id',Auth::user())
+            ->first();
+            DB::statement('call fact2invent('.$factura_id{'id'}.');');
+        }
+        return redirect()->route('venta.index');
     }
 
     /**

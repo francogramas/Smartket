@@ -1,4 +1,5 @@
 $(document).ready(function(){
+//-----------------------------------------------------------------------------------------
     $("#paises").change(function(event){
   		$.get("/departamentos/"+event.target.value+"", function(response,state){
   			$("#departamentos").empty();
@@ -7,7 +8,7 @@ $(document).ready(function(){
   			}
   		});
     });
-
+//-----------------------------------------------------------------------------------------
      $("#departamentos").change(function(event){
   		$.get("/ciudades/"+event.target.value+"", function(response,state){
   			$("#ciudad").empty();
@@ -16,7 +17,7 @@ $(document).ready(function(){
   			}
   		});
     });
-
+//-----------------------------------------------------------------------------------------
   $(function()
   {
      $("#buscarP").autocomplete({
@@ -31,7 +32,25 @@ $(document).ready(function(){
       $("#buscarP").val("");
     });
   });
-
+//-----------------------------------------------------------------------------------------
+  $(function()
+  {
+     $("#buscarPInv").autocomplete({
+      source: "/buscar/productoInventario",
+      minLength: 1,
+      select: function(event, ui) {
+        $('#buscarPInv').val(ui.item.value);
+        $('#producto_id').val(ui.item.id);
+        $('#valor').val(ui.item.valor);
+        $('#lote').val(ui.item.lote);
+        $('#stock').val(ui.item.cantidad);
+      }
+    });
+      $("#buscarPInv").click(function(){
+      $("#buscarPInv").val("");
+    });
+  });
+//-----------------------------------------------------------------------------------------
   $(function() {
      $("#buscarTercero").autocomplete({
       source: "/buscar/tercero",
@@ -45,7 +64,7 @@ $(document).ready(function(){
       $("#buscarTercero").val("");
     });
   });
-
+//-----------------------------------------------------------------------------------------
   $('.btn-delete').click( function(e){
     e.preventDefault();
     var row = $(this).parents('tr');
@@ -62,4 +81,10 @@ $(document).ready(function(){
       alert('El registro no se pudo eliminar');
     });
   });
+//-----------------------------------------------------------------------------------------
+ $("#TxtEfectivo").change(function(event) {
+    var total=$("#hdnTotal").val();
+    var efectivo=$("#TxtEfectivo").val();
+    $('#LblCambio').text('$ '+(efectivo-total));
+ });
 });

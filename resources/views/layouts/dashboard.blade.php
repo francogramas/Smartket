@@ -84,6 +84,9 @@
                                 <li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
                                     <a href="{{ url ('/inventario/agotados' ) }}">Agotados</a>
                                 </li>
+                                <li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
+                                    <a href="{{ url ('/inventario/inicial' ) }}">Inicial</a>
+                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>

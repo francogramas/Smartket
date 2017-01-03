@@ -26,9 +26,10 @@
 	<div class="col-sm-8">
 		<div class="row">
 			<div class="col-sm-12">
-				<h5>Proveedor</h5>
+				<h5>Cliente</h5>
+				<input type="hidden" id="users_id" value={{ $aut }}>
 				{!! Form::hidden('tercero_id',$terceros1{'id'},['id'=>'tercero_id']) !!}
-				{!! Form::text('buscarTercero',$terceros1{'nit'}.' || '.$terceros1{'nombres'}.' '.$terceros1{'apellido1'}.' '.$terceros1{'apellido2'},['id'=>'buscarTercero','required'=>'required','class'=>'form-control','placeholder'=>'Proveedor...']) !!}
+				{!! Form::text('buscarTercero',$terceros1{'nit'}.' || '.$terceros1{'nombres'}.' '.$terceros1{'apellido1'}.' '.$terceros1{'apellido2'},['id'=>'buscarTercero','required'=>'required','class'=>'form-control','placeholder'=>'Cliente...']) !!}
 			</div>
 		</div>
 	</div>
@@ -43,8 +44,8 @@
 			</div>
 			<div class="col-sm-10">
 				<h5>Producto</h5>
-				{!! Form::hidden('producto_id',null,['id'=>'producto_id','class'=>'form-control']) !!}
-				{!! Form::text('buscarP',null,['id'=>'buscarP','required'=>'required','autocomplete'=>'on','class'=>'form-control','placeholder'=>'Prodcuto...']) !!}
+				{!! Form::hidden('producto_id',null,['id'=>'producto_id']) !!}
+				{!! Form::text('buscarPInv',null,['id'=>'buscarPInv','required'=>'required','autocomplete'=>'on','class'=>'form-control','placeholder'=>'Prodcuto...']) !!}
 			</div>
 		</div>
 	</div>
@@ -56,11 +57,11 @@
 			</div>
 			<div class="col-sm-3">
 				<h5>Lote</h5>
-				{!! Form::text('lote','0000',['id'=>'lote','required'=>'required','class'=>'form-control','placeholder'=>'0000']) !!}
+				{!! Form::text('lote','',['id'=>'lote','required'=>'required','class'=>'form-control','placeholder'=>'0000']) !!}
 			</div>
 			<div class="col-sm-3">
 				<h5>Stock</h5>
-				{!! Form::text('stock','1',['id'=>'stock','required'=>'required','class'=>'form-control','placeholder'=>'0000']) !!}
+				{!! Form::text('stock','1',['id'=>'stock','required'=>'required','class'=>'form-control','placeholder'=>'0']) !!}
 			</div>
 		</div>
 	</div>
@@ -72,15 +73,25 @@
 	</div>
 	<div class="col-sm-1">
 		<h5><br></h5>
-		<a href={{ route('inicial.create') }} class="btn - btn-success"> Finalizar </a>		
+		<a href={{ route('venta.create') }} class="btn - btn-success"> Finalizar </a>		
 	</div>
 	<div class="col-sm-1">
 		<h5><br></h5>
-		<button type="submit" class="btn btn-warning" name="posponer" formnovalidate="formnovalidate">Posponer</button>
+		<button type="submit" class="btn btn-danger" name="cancelar" formnovalidate="formnovalidate">Cancelar</button>
 	</div>
 	<div class="col-sm-2">
 		<h5>Valor Total</h5>
+		<input type="hidden" value="{{ $totales->valorTotal }}" id="hdnTotal">
+		<label id="vrTotal">{{ '$ '.number_format(($totales->valorTotal),2, '.', ',') }}</label>
 	</div>	
+	<div class="col-sm-2">
+		<h5>Efectivo</h5>
+		<input type="text" id="TxtEfectivo" class="form-control" placeholder="$ 0.00">
+	</div>
+	<div class="col-sm-2">
+		<h5>Cambio</h5>
+		<label for="" id="LblCambio"></label>
+	</div>
 </div>
 <div class="row">
 	<div class="col-sm-10">
@@ -115,7 +126,6 @@
 </div>
 
 {!! Form::close() !!}
-
 
 {!! Form::open(['route' => ['inicial.destroy',':DETALLE_ID'],'method'=>'DELETE', 'id'=>'form-delete' ]) !!}
 {!! Form::close() !!}
