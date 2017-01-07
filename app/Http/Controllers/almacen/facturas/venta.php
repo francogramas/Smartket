@@ -58,11 +58,10 @@ class venta extends Controller
      */
     public function create()
     {
-        // esta funcion finaliza la factura y lleva todos los datos de la factura al inventario
-        
+        // esta funcion finaliza la factura y lleva todos los datos de la factura al inventario        
         $count = factura::where('tipo', 1)
         ->where('estado_id', 1)
-        ->where('users_id',Auth::user())
+        ->where('users_id',Auth::user()->id)
         ->count();
 
         if ($count>0)
@@ -70,7 +69,7 @@ class venta extends Controller
             $factura_id =factura::select('id')
             ->where('tipo', 6)
             ->where('estado_id', 1)
-            ->where('users_id',Auth::user())
+            ->where('users_id',Auth::user()->id)
             ->first();
             DB::statement('call fact2invent('.$factura_id{'id'}.');');
         }
@@ -85,8 +84,10 @@ class venta extends Controller
      */
     public function store(Request $request)
     {
+        // Esta funcion almacena el detalle de cada una de las facturas, cada producto en el lstado de fatcuras
         $count = factura::where('tipo', 1)
         ->whereIn('estado_id', [1])
+        ->where('users_id',Auth::user()->id)
         ->count();
 
         if ($count==0)
@@ -94,7 +95,9 @@ class venta extends Controller
             factura::create($request->all());
         }
 
-        $count1 = factura::where('tipo',1)->where('estado_id', 1)
+        $count1 = factura::where('tipo',1)
+        ->where('estado_id', 1)
+        ->where('users_id',Auth::user()->id)
         ->count();
 
         if ($count1>0)
@@ -102,19 +105,23 @@ class venta extends Controller
             $factura_id =factura::select('id')
             ->where('tipo', 1)
             ->whereIn('estado_id', [1])
+            ->where('users_id',Auth::user()->id)
             ->first();
-            $request->request->add(['factura_id' => $factura_id{'id'}]);
-            facturaDetalle::create($request->all());
+
+            $cantidadFactura=DB::table('facturaDetalle')
+            ->join('factura','facturadetalle.factura_id','=','factura.id')
+            ->where('factura.estado_id','1')
+            ->where('factura.tipo','1')
+            ->where('inventario_id',$request{'inventario_id'})
+            ->sum('facturadetalle.cantidad');
+
+           if ($request{'cantidad'}<=$request{'stock'}-$cantidadFactura){
+                $request->request->add(['factura_id' => $factura_id{'id'}]);
+                facturaDetalle::create($request->all());
+            }
         }
         return redirect()->route('venta.index');
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //

@@ -44,6 +44,8 @@ $(document).ready(function(){
         $('#valor').val(ui.item.valor);
         $('#lote').val(ui.item.lote);
         $('#stock').val(ui.item.cantidad);
+        $('#inventario_id').val(ui.item.inventario_id);
+
       }
     });
       $("#buscarPInv").click(function(){
@@ -85,6 +87,11 @@ $(document).ready(function(){
  $("#TxtEfectivo").change(function(event) {
     var total=$("#hdnTotal").val();
     var efectivo=$("#TxtEfectivo").val();
-    $('#LblCambio').text('$ '+(efectivo-total));
+     var efectivoN=Number(efectivo.replace(/[^0-9\.]+/g,""));
+    $('#LblCambio').val((efectivoN-total)*100);
  });
+ //---------------------------------------------------------------------------------------
+ $(function() {
+    $('.currency').maskMoney({thousands:',', decimal:'.', allowZero:true, prefix: '$ '});
+  })
 });

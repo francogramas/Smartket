@@ -22,6 +22,7 @@
 	@yield('body')
 	{!! Html::script('assets/scripts/frontend.js') !!}
 	{!! Html::script('assets/scripts/jquery-ui.min.js') !!}
+	{!! Html::script('js/jquery.maskMoney.min.js') !!}
 	{!! Html::script('js/dropdown.js') !!}
 </body>
 </html>

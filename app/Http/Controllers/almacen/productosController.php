@@ -56,7 +56,7 @@ class productosController extends Controller
         $term = $request->input('term');
         $results = array();
 
-        $queries = inventario::select('productos.id','productos.codigo','productos.nombre','inventario.lote','inventario.cantidad','inventario.costo','inventario.valor')
+        $queries = inventario::select('inventario.id as inventario_id','productos.id','productos.codigo','productos.nombre','inventario.lote','inventario.cantidad','inventario.costo','inventario.valor')
             ->join('productos','inventario.producto_id','=','productos.id')
             ->where('productos.nombre', 'LIKE', '%'.$term.'%')
             ->orWhere('productos.codigo', 'LIKE', '%'.$term.'%')
@@ -64,7 +64,7 @@ class productosController extends Controller
 
         foreach ($queries as $query)
         {
-            $results[] = [ 'id' => $query->id, 'value' => $query->codigo.' || '.$query->nombre, 'valor'=> $query->valor, 'costo'=>$query->costo, 'cantidad'=>$query->cantidad, 'lote'=>$query->lote];
+            $results[] = [ 'id' => $query->id, 'value' => $query->codigo.' || '.$query->nombre, 'valor'=> $query->valor, 'costo'=>$query->costo, 'cantidad'=>$query->cantidad, 'lote'=>$query->lote, 'inventario_id'=>$query->inventario_id];
         }
 
         return Response()->json($results);
