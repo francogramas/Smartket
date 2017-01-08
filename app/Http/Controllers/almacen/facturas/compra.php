@@ -11,7 +11,9 @@ use \SmartKet\models\almacen\facturas\factura;
 use \SmartKet\models\almacen\facturas\facturaDetalle;
 use SmartKet\models\almacen\productos\productos;
 use SmartKet\models\almacen\terceros;
+use Auth;
 use DB;
+use Session;
 
 
 
@@ -27,9 +29,11 @@ class compra extends Controller
     {
         $fecha=Carbon::now()->format('Y-m-d');
         $date=Carbon::now()->addYears(5)->format('Y-m-d');
+        $aut=Auth::user()->id;
 
         $factura_id =factura::where('tipo', 2)
             ->where('estado_id', 1)
+            ->where('users_id',$aut)
             ->first();
 
         $terceros1 = terceros::select('id','nombres','apellido1','apellido2','nit')
@@ -52,19 +56,18 @@ class compra extends Controller
         ->with('facturaDetalles',$facturaDetalles)
         ->with('factura_id',$factura_id)
         ->with('terceros1',$terceros1)
+        ->with('aut',$aut)
         ->with('totales',$totales->toArray());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         // esta funcion finaliza la factura y lleva todos los datos de la factura al inventario
+        $aut=Auth::user()->id;
+
         $count = factura::where('tipo', 2)
         ->where('estado_id', 1)
+        ->where('users_id',$aut)
         ->count();
 
         if ($count>0)
@@ -72,22 +75,20 @@ class compra extends Controller
             $factura_id =factura::select('id')
             ->where('tipo', 2)
             ->where('estado_id', 1)
+            ->where('users_id',$aut)
             ->first();   
             DB::statement('call fact2invent('.$factura_id{'id'}.');');
         }
         return redirect()->route('compra.index');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
+        $aut=Auth::user()->id;
+
         $count = factura::where('tipo', 2)
         ->where('estado_id', 1)
+        ->where('users_id',$aut)
         ->count();
 
         if ($count==0)
@@ -103,6 +104,7 @@ class compra extends Controller
             $factura_id =factura::select('id')
             ->where('tipo', 2)
             ->where('estado_id', 1)
+            ->where('users_id',$aut)
             ->first();
             $request->request->add(['factura_id' => $factura_id{'id'}]);
             facturaDetalle::create($request->all());
@@ -111,15 +113,23 @@ class compra extends Controller
         return redirect()->route('compra.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
-        //
+           // esta funcion cancela la factura        
+        $factura = factura::select('id')
+        ->where('tipo', 2)
+        ->where('estado_id', 1)
+        ->where('users_id',Auth::user()->id)
+        ->first();  
+
+        if ($factura{'id'}>0)
+        {
+            DB::statement('call factVenta2Invetario(?,?);',[$factura{'id'},4]);
+            Session::flash('delete','La factura fué cancelada');
+
+        }
+        return redirect()->route('compra.index');
     }
 
     /**

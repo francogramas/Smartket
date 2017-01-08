@@ -28,6 +28,7 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<h5>Proveedor</h5>
+				{!! Form::hidden('users_id',$aut,['id'=>'users_id']) !!}
 				{!! Form::hidden('tercero_id',$terceros1{'id'},['id'=>'tercero_id']) !!}
 				{!! Form::text('buscarTercero',$terceros1{'nit'}.' || '.$terceros1{'nombres'}.' '.$terceros1{'apellido1'}.' '.$terceros1{'apellido2'},['id'=>'buscarTercero','required'=>'required','class'=>'form-control','placeholder'=>'Proveedor...']) !!}
 			</div>
@@ -86,11 +87,7 @@
 	</div>
 	<div class="col-sm-1">
 		<h5><br></h5>
-		<button type="submit" class="btn btn-warning" name="posponer" formnovalidate="formnovalidate"> Posponer </button>
-	</div>
-	<div class="col-sm-1">
-		<h5><br></h5>
-		<a href={{ route('compra.create') }} class="btn - btn-danger"> Cancelar </a>
+		<a href={{ route('compra.show','0') }} class="btn - btn-danger"> Cancelar </a>
 	</div>
 	<div class="col-sm-3">
 	</div>

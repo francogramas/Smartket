@@ -63,9 +63,9 @@
                                 <li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
                                     <a href="{{ url ('/facturas/pedido' ) }}">Pedido</a>
                                 </li>
-                                <li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
+                                <!-- li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
                                     <a href="{{ url ('/facturas/devolucion' ) }}">Devolución</a>
-                                </li>
+                                </li-->
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>

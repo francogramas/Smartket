@@ -1,7 +1,6 @@
 <?php
 
 namespace SmartKet\Http\Controllers\almacen\facturas;
-
 use Illuminate\Http\Request;
 
 use SmartKet\Http\Requests;
@@ -13,6 +12,7 @@ use SmartKet\models\almacen\productos\productos;
 use SmartKet\models\almacen\terceros;
 use DB;
 use Auth;
+use Session;
 
 
 class venta extends Controller
@@ -21,7 +21,7 @@ class venta extends Controller
     {
         $fecha=Carbon::now()->format('Y-m-d');
         $date=Carbon::now()->addYears(5)->format('Y-m-d');
-        $aut=Auth::id();
+        $aut=Auth::user()->id;
 
         $factura_id =factura::where('tipo', 1)
             ->whereIn('estado_id', [1])
@@ -51,37 +51,22 @@ class venta extends Controller
         ->with('terceros1',$terceros1);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         // esta funcion finaliza la factura y lleva todos los datos de la factura al inventario        
-        $count = factura::where('tipo', 1)
+        $factura = factura::select('id')
+        ->where('tipo', 1)
         ->where('estado_id', 1)
         ->where('users_id',Auth::user()->id)
-        ->count();
+        ->first();  
 
-        if ($count>0)
+        if ($factura{'id'}>0)
         {
-            $factura_id =factura::select('id')
-            ->where('tipo', 6)
-            ->where('estado_id', 1)
-            ->where('users_id',Auth::user()->id)
-            ->first();
-            DB::statement('call fact2invent('.$factura_id{'id'}.');');
+            DB::statement('call factVenta2Invetario(?,?);',[$factura{'id'},2]);
         }
         return redirect()->route('venta.index');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         // Esta funcion almacena el detalle de cada una de las facturas, cada producto en el lstado de fatcuras
@@ -122,9 +107,23 @@ class venta extends Controller
         }
         return redirect()->route('venta.index');
     }
+
     public function show($id)
     {
-        //
+          // esta funcion cancelar la factura        
+        $factura = factura::select('id')
+        ->where('tipo', 1)
+        ->where('estado_id', 1)
+        ->where('users_id',Auth::user()->id)
+        ->first();  
+
+        if ($factura{'id'}>0)
+        {
+            DB::statement('call factVenta2Invetario(?,?);',[$factura{'id'},4]);
+            Session::flash('delete','La factura fué cancelada');
+
+        }
+        return redirect()->route('venta.index');
     }
 
     /**

@@ -9,7 +9,7 @@ class factura extends Model
     protected $table='factura';
 	protected $primarykey='id';
 
-	protected $fillable=['id','numero','prefijo','tercero_id','fecha','tipo','estado_id'];
+	protected $fillable=['id','numero','prefijo','tercero_id','fecha','tipo','estado_id','users_id'];
 
 	public function facturaDetalle(){
 		return $this -> belongsto(facturaDetalle::class);

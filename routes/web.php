@@ -38,6 +38,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('/terceros','almacen\terceros');
 	Route::resource('/categorias','almacen\categoriaController');
 	Route::resource('/productos','almacen\productosController');
+	Route::resource('/cartera','almacen\carteraController');
+
 	
 	Route::get('/inventario/consolidado', function()
 	{

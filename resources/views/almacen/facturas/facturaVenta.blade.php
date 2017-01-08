@@ -27,7 +27,7 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<h5>Cliente</h5>
-				<input type="hidden" id="users_id" value={{ $aut }}>
+				{!! Form::hidden('users_id',$aut,['id'=>'users_id']) !!}
 				{!! Form::hidden('tercero_id',$terceros1{'id'},['id'=>'tercero_id']) !!}
 				{!! Form::text('buscarTercero',$terceros1{'nit'}.' || '.$terceros1{'nombres'}.' '.$terceros1{'apellido1'}.' '.$terceros1{'apellido2'},['id'=>'buscarTercero','required'=>'required','class'=>'form-control','placeholder'=>'Cliente...']) !!}
 			</div>
@@ -76,11 +76,11 @@
 	</div>
 	<div class="col-sm-1">
 		<h5><br></h5>
-		<a href={{ route('venta.create') }} class="btn - btn-success"> Finalizar </a>		
+		<a href={{ route('venta.create') }} class="btn btn-success"> Finalizar </a>		
 	</div>
 	<div class="col-sm-1">
 		<h5><br></h5>
-		<button type="submit" class="btn btn-danger" name="cancelar" formnovalidate="formnovalidate">Cancelar</button>
+		<a href={{ route('venta.show','0') }} class="btn btn-danger"> Cancelar </a>	
 	</div>
 	<div class="col-sm-2">
 		<h5>Valor Total</h5>
