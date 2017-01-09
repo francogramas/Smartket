@@ -87,7 +87,7 @@
 	</div>
 	<div class="col-sm-1">
 		<h5><br></h5>
-		<a href={{ route('compra.show','0') }} class="btn - btn-danger"> Cancelar </a>
+		<a href={{ route('compra.show','0') }} class="btn  btn-danger"> Cancelar </a>
 	</div>
 	<div class="col-sm-3">
 	</div>

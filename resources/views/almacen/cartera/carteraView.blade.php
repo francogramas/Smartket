@@ -44,38 +44,38 @@
 	</div>
 	<div class="col-sm-8">
 		<div class="row">
-			<div class="col-sm-4">
-			<div class="panel panel-info">
-			  <div class="panel-heading">Detalles de Cartera</div>
-			  <div class="panel-body">
-				<label for="tipoCartera">Tipo de Cartera</label>
-				<select name="tipoCartera" id="tipoCartera" class="form-control">
-					<option value="1">Deudores</option>
-					<option value="2">Acreedores</option>
-				</select>
-			  </div>
-			</div>				
-		</div>
 
-		<div class="col-sm-8">
+		<div class="col-sm-12">
 			<div class="panel panel-info">
 			  <div class="panel-heading">Agregar Información</div>
 			  <div class="panel-body">
-			  	<div>
-			  		<row>
-			  			<div class="col-sm-3">
+			  <div class="row">
+			  	<div class="col-sm-12">
+			  		<label for="terceroCartera">Buscar</label>
+					<input type="text" id="terceroCartera" class="form-control" placeholder="Buscar...">			  		
+			  	</div>
+			  </div>
+			  <br>
+			  	<div class="row">
+			  			<div class="col-sm-4">
+			  				<label for="tipoCartera">Tipo de Cartera</label>
+							<select name="tipoCartera" id="tipoCartera" class="form-control">
+								<option value="1">Deudores</option>
+								<option value="2">Acreedores</option>
+							</select>
+			  			</div>
+			  			<div class="col-sm-2">
 			  				<label for="txtDeuda">Deuda</label>
 			  				<input class="form-control currency" id="txtDeuda" type="text" placeholder="$ 0.00"></div>
-			  			<div class="col-sm-3">
+			  			<div class="col-sm-2">
 			  				<label for="txtAbono">Abono</label>
 			  				<input class="form-control currency" id="txtAbono" type="text" placeholder="$ 0.00"></div>
-			  			<div class="col-sm-3">
+			  			<div class="col-sm-2">
 			  				<label for="txtSaldo">Saldo</label>
 			  				<input class="form-control currency" id="txtSaldo" type="text" placeholder="$ 0.00" readonly="true"></div>
-			  			<div class="col-sm-3">
+			  			<div class="col-sm-2">
 			  				<label for=""> <br> </label> 
-			  				<a href="#" class="form-control btn btn-info" id="agregarAbono">Agregar</a> </div>
-			  		</row>
+			  				<a href="#" class="form-control btn btn-info" id="agregarAbono">Agregar</a> </div>	
 			  	</div>
 			  </div>
 			</div>
@@ -86,9 +86,7 @@
 				<div class="panel panel-info">
 				  <div class="panel-heading">Detalle de Abonos</div>
 				  <div class="panel-body">
-				  <label for="terceroCartera">Buscar</label>
-					<input type="text" id="terceroCartera" class="form-control" placeholder="Buscar...">
-					<table class="table table-striped">
+				  	<table class="table table-striped">
 						<thead>
 							<tr>
 								<td>Fecha</td>
