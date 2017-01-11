@@ -19,9 +19,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('/admin/segurosmedicos', 'admin\contratacion\seguroMedicoController');
 	Route::resource('/admin/segurosmedicoslistado', 'admin\contratacion\seguroMedicoListadoController');*/
 
-	Route::resource('/admin/empleados', 'admin\contratacion\empleadosController');	
-	Route::resource('/admin/empleadoslistado', 'admin\contratacion\empleadoslistadoController');	
-	Route::resource('/admin/contratos', 'admin\contratacion\contratosController');	
+	Route::resource('/admin/empleados', 'admin\contratacion\empleadosController');
+	Route::resource('/admin/empleadoslistado', 'admin\contratacion\empleadoslistadoController');
+	Route::resource('/admin/contratos', 'admin\contratacion\contratosController');
 	//facturas de venta
 	Route::resource('/facturas/venta','almacen\facturas\venta');
 	Route::resource('/facturas/ventapuntos','facturapuntosController');
@@ -69,7 +69,6 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('/cartera','almacen\carteraController');
 	Route::resource('/carteraAcreedores','almacen\carteraAcreedoresController');
 	Route::resource('/carteraInforme','almacen\carteraInformeController');
-
 
 	Route::get('/cartera/detalle/{tercero_id}/{tipocartera_id}','almacen\carteraController@detalleAbonos');
 	Route::get('/cartera/consolidado/{tipocartera_id}','almacen\carteraController@consolidado');

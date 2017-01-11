@@ -123,6 +123,9 @@
                         <li {{ (Request::is('*clientes') ? 'class="active"' : '') }}>
                             <a href="{{ url ('/terceros') }}"><i class="fa fa-users fa-fw"></i>Terceros</a>
                         </li>
+                        <li>
+                            <a href="{{ url ('/empresa' ) }}"><i class="fa fa-compass fa-fw"></i>Empresa<span class="fa arrow"></span></a>
+                        </li>
                 </div>
                 <!-- /.sidebar-collapse -->
             </div>

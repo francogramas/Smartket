@@ -8,7 +8,7 @@
 	<div class="col-sm-4">
 		<div class="row">
 			<div class="col-sm-3">
-				<h5>Prefijo</h5>
+				<h5>Prefijo</h5>kb
 				{!! Form::text('prefijo',$factura_id{'prefijo'},['id'=>'prefijo','class'=>'form-control','placeholder'=>'']) !!}
 			</div>
 			<div class="col-sm-3">
@@ -50,7 +50,7 @@
 		</div>
 	</div>
 	<div class="col-sm-6">
-		<div class="row">			
+		<div class="row">
 			<div class="col-sm-3">
 				<h5>Valor</h5>
 				{!! Form::number('valor',null,['id'=>'valor','required'=>'required','class'=>'form-control','placeholder'=>'$0.00']) !!}
@@ -103,9 +103,9 @@
 					<tr>
 						<td> {{ '$ '.number_format(($total->valorTotal),2, '.', ',') }}</td>
 						<td> {{ '$ '.number_format(($total->costoTotal),2, '.', ',') }}</td>
-						<td> {{ '$ '.number_format(($total->UtilidadNeta),2, '.', ',') }}</td>													
+						<td> {{ '$ '.number_format(($total->UtilidadNeta),2, '.', ',') }}</td>
 					</tr>
-				@endforeach				
+				@endforeach
 			</tbody>
 		</table>
 	</div>
