@@ -40,12 +40,11 @@
 						<td>{{ '$ '.number_format(($listadoi->saldo),2, '.', ',') }}</td>
 					</tr>
 				@endforeach
-					
 				</tbody>
 			</table>
 		</div>
 		@endsection
-		@include('widgets.panel', array('header'=>true, 'as'=>'inside', 'class'=>'info'))		 		
+		@include('widgets.panel', array('header'=>true, 'as'=>'inside', 'class'=>'danger'))
 		</div>
 	</div>
 	<div class="col-sm-8">
@@ -59,8 +58,8 @@
 			  	<div class="col-sm-12">
 			  		<label for="buscarTerceroCartera">Buscar</label>
 					<input type="text" id="buscarTerceroCartera" class="form-control" placeholder="Buscar...">	
-					<input type="hidden" value="0" id="tercero_id">		  		
-					<input type="hidden" value="2" id="tipocartera_id">		  		
+					<input type="hidden" value="0" id="tercero_id">
+					<input type="hidden" value="2" id="tipocartera_id">
 			  	</div>
 			  </div>
 			  <br>

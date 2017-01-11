@@ -45,6 +45,7 @@
                             <a href="{{ url ('charts') }}"><i class="fa fa-bar-chart-o fa-fw"></i> Estadísticas</a>
                             <!-- /.nav-second-level -->
                         </li>
+
                         <!--li {{ (Request::is('*forms') ? 'class="active"' : '') }}>
                             <a href="{{ url ('forms') }}"><i class="fa fa-edit fa-fw"></i> Forms</a>
                         </li-->
@@ -62,11 +63,13 @@
                                 </li>
                                 <li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
                                     <a href="{{ url ('/facturas/pedido' ) }}">Pedido</a>
+
                                 </li>
                                 <!-- li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
                                     <a href="{{ url ('/facturas/devolucion' ) }}">Devolución</a>
                                 </li-->
                             </ul>
+
                             <!-- /.nav-second-level -->
                         </li>
                         <li >

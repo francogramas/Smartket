@@ -56,12 +56,12 @@
 <div class="row">
 	<div class="col-sm-1">
 		<h5><br></h5>
-		<a href={{ route('inicial.create') }} class="btn - btn-success"> Finalizar </a>		
+		<a href={{ route('inicial.create') }} class="btn - btn-success"> Finalizar </a>
 	</div>
 	<div class="col-sm-1">
 		<h5><br></h5>
 		<button type="submit" class="btn btn-warning" name="posponer" formnovalidate="formnovalidate">Posponer</button>
-	</div>	
+	</div>
 </div>
 
 {!! Form::close() !!}

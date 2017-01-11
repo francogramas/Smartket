@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFacturapuntosTable extends Migration
+class CreatePuntosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,24 +13,19 @@ class CreateFacturapuntosTable extends Migration
      */
     public function up()
     {
-
-        Schema::create('facturapuntos', function(Blueprint $table)
+         Schema::create('puntos', function(Blueprint $table)
         {
-
             $table->increments('id');
-            $table->integer('numero')->unsigned()->default('0');
-            $table->string('prefijo',10);
+            $table->integer('facturapuntos_id')->unsigned()->default('0');
             $table->integer('tercero_id')->unsigned()->index();
-            $table->timestamp('fecha');
-            $table->integer('tipo')->unsigned()->index();
-            $table->integer('estado_id')->unsigned()->index();
+            $table->integer('estadopuntos_id')->unsigned()->index();
             $table->double('valor');
 
             $table->timestamps();
 
             $table->foreign('tercero_id')->references('id')->on('terceros');
-            $table->foreign('tipo')->references('id')->on('tipo');
-            $table->foreign('estado_id')->references('id')->on('estadoFactura');
+            $table->foreign('estadopuntos_id')->references('id')->on('estadopuntos');
+            $table->foreign('facturapuntos_id')->references('id')->on('facturapuntos');
         });
     }
 
@@ -41,6 +36,6 @@ class CreateFacturapuntosTable extends Migration
      */
     public function down()
     {
-        Schema::drop('facturapuntos');
+        Schema::drop('puntos');
     }
 }

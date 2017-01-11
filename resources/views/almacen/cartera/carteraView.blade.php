@@ -40,12 +40,11 @@
 						<td>{{ '$ '.number_format(($listadoi->saldo),2, '.', ',') }}</td>
 					</tr>
 				@endforeach
-					
 				</tbody>
 			</table>
 		</div>
 		@endsection
-		@include('widgets.panel', array('header'=>true, 'as'=>'inside', 'class'=>'info'))		 		
+		@include('widgets.panel', array('header'=>true, 'as'=>'inside', 'class'=>'success'))
 		</div>
 	</div>
 	<div class="col-sm-8">
@@ -58,9 +57,9 @@
 			  <div class="row">
 			  	<div class="col-sm-12">
 			  		<label for="buscarTerceroCartera">Buscar</label>
-					<input type="text" id="buscarTerceroCartera" class="form-control" placeholder="Buscar...">	
-					<input type="hidden" value="0" id="tercero_id">		  		
-					<input type="hidden" value="1" id="tipocartera_id">		  		
+					<input type="text" id="buscarTerceroCartera" class="form-control" placeholder="Buscar...">
+					<input type="hidden" value="0" id="tercero_id">
+					<input type="hidden" value="1" id="tipocartera_id">
 			  	</div>
 			  </div>
 			  <br>
@@ -72,8 +71,8 @@
 			  				<label for="txtAbono">Abono</label>
 			  				<input class="form-control currency" id="txtAbono" type="text" placeholder="$ 0.00"></div>
 			  			<div class="col-sm-3">
-			  				<label for=""> <br> </label> 
-			  				<a href="#" class="form-control btn btn-info" id="agregarAbono">Agregar</a> </div>	
+			  				<label for=""> <br> </label>
+			  				<a href="#" class="form-control btn btn-info" id="agregarAbono">Agregar</a> </div>
 			  	</div>
 			  </div>
 			</div>

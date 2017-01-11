@@ -12,11 +12,13 @@
 */
 
 Route::group(['middleware' => 'auth'], function () {
+
 	/*Route::resource('/admin/empresa', 'admin\empresaController');
 	Route::resource('/admin/pacientes', 'admin\pacientesController');
 	Route::resource('/admin/pacienteslistado', 'admin\pacientesListadoController');
 	Route::resource('/admin/segurosmedicos', 'admin\contratacion\seguroMedicoController');
 	Route::resource('/admin/segurosmedicoslistado', 'admin\contratacion\seguroMedicoListadoController');*/
+
 	Route::resource('/admin/empleados', 'admin\contratacion\empleadosController');	
 	Route::resource('/admin/empleadoslistado', 'admin\contratacion\empleadoslistadoController');	
 	Route::resource('/admin/contratos', 'admin\contratacion\contratosController');	
@@ -39,7 +41,6 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('/categorias','almacen\categoriaController');
 	Route::resource('/productos','almacen\productosController');
 
-	
 	Route::get('/inventario/consolidado', function()
 	{
 		return View::make('almacen/inventario/consolidado');
@@ -74,7 +75,6 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/cartera/consolidado/{tipocartera_id}','almacen\carteraController@consolidado');
 	Route::post('/carteraCrear','almacen\carteraController@store');
 });
-
 
 
 // Buscar Producto

@@ -18,9 +18,9 @@ class CreateEmpresaTable extends Migration
             $table->increments('id');
             $table->string('razonsocial');
             $table->string('nit');
-            $table->integer('ciudad')->unsigned()->index();            
+            $table->integer('ciudad')->unsigned()->index();
             $table->string('direccion');
-            $table->string('telefono');            
+            $table->string('telefono');
             $table->string('correo');
 
             $table->timestamps();
