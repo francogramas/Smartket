@@ -10,7 +10,7 @@ class facturaDetalle extends Model
 	protected $table='facturaDetalle';
 	protected $primarykey='id';
 
-	protected $fillable=['id','factura_id','lote','cantidad','producto_id','costo','valor','stockMin','vence','inventario_id'];
+	protected $fillable=['id','factura_id','lote','cantidad','producto_id','costo','valor','stockMin','vence'];
 
 	public function productos(){
 		return $this -> hasmany(productos::class);

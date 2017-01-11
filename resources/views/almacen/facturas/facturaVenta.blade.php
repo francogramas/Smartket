@@ -45,10 +45,7 @@
 			<div class="col-sm-10">
 				<h5>Producto</h5>
 				{!! Form::hidden('producto_id',null,['id'=>'producto_id']) !!}
-				<input type="hidden" id="producto_id">
-				{!! Form::text('buscarPInv',null,['id'=>'buscarPInv','required'=>'required','autocomplete'=>'on','class'=>'form-control','placeholder'=>'Prodcuto...']) !!}				
-				{!! Form::hidden('inventario_id',null,['id'=>'inventario_id']) !!}
-
+				{!! Form::text('buscarPInv',null,['id'=>'buscarPInv','required'=>'required','autocomplete'=>'on','class'=>'form-control','placeholder'=>'Prodcuto...']) !!}
 			</div>
 		</div>
 	</div>
@@ -56,15 +53,15 @@
 		<div class="row">
 			<div class="col-sm-3">
 				<h5>Valor</h5>
-				{!! Form::number('valor',null,['id'=>'valor','required'=>'required','class'=>'form-control','placeholder'=>'$0.00','readonly'=>'true']) !!}
+				{!! Form::number('valor',null,['id'=>'valor','required'=>'required','class'=>'form-control','placeholder'=>'$0.00']) !!}
 			</div>
 			<div class="col-sm-3">
 				<h5>Lote</h5>
-				{!! Form::text('lote','',['id'=>'lote','required'=>'required','class'=>'form-control','placeholder'=>'0000','readonly'=>'true']) !!}
+				{!! Form::text('lote','',['id'=>'lote','required'=>'required','class'=>'form-control','placeholder'=>'0000']) !!}
 			</div>
 			<div class="col-sm-3">
 				<h5>Stock</h5>
-				{!! Form::text('stock','1',['id'=>'stock','required'=>'required','class'=>'form-control','placeholder'=>'0','readonly'=>'true']) !!}
+				{!! Form::text('stock','1',['id'=>'stock','required'=>'required','class'=>'form-control','placeholder'=>'0']) !!}
 			</div>
 		</div>
 	</div>
@@ -72,7 +69,7 @@
 <div class="row">
 	<div class="col-sm-1">
 		<h5><br></h5>
-		<button type="submit" class="btn btn-primary" name="agregar" > Agregar </button>
+		<button type="submit" class="btn btn-primary" name="agregar" >Agregar</button>
 	</div>
 	<div class="col-sm-1">
 		<h5><br></h5>
@@ -93,7 +90,7 @@
 	</div>
 	<div class="col-sm-2">
 		<h5>Cambio</h5>
-		<input type="text" id="LblCambio" class="form-control currency" placeholder="$ 0.00" readonly="true">		
+		<input type="text" class="form-control currency" id="LblCambio" readonly="true" placeholder="$ 0.00" >
 	</div>
 </div>
 <div class="row">

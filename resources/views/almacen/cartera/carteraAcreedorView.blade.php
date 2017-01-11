@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
-@section('page_heading','Cartera de deudores')
+@section('page_heading','Cartera de acreedores')
 @section('section')
 
 {{ csrf_field() }}
@@ -60,7 +60,7 @@
 			  		<label for="buscarTerceroCartera">Buscar</label>
 					<input type="text" id="buscarTerceroCartera" class="form-control" placeholder="Buscar...">	
 					<input type="hidden" value="0" id="tercero_id">		  		
-					<input type="hidden" value="1" id="tipocartera_id">		  		
+					<input type="hidden" value="2" id="tipocartera_id">		  		
 			  	</div>
 			  </div>
 			  <br>

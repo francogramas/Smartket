@@ -45,7 +45,6 @@ $(document).ready(function(){
         $('#lote').val(ui.item.lote);
         $('#stock').val(ui.item.cantidad);
         $('#inventario_id').val(ui.item.inventario_id);
-
       }
     });
       $("#buscarPInv").click(function(){
@@ -64,6 +63,35 @@ $(document).ready(function(){
     });
      $("#buscarTercero").click(function(){
       $("#buscarTercero").val("");
+      $('#tercero_id').val('0');
+    });
+  });
+  //-----------------------------------------------------------------------------------------
+  $(function() {
+     $("#buscarTerceroCartera").autocomplete({
+      source: "/buscar/tercero",
+      minLength: 1,
+      select: function(event, ui) {
+        $('#buscarTerceroCartera').val(ui.item.value);
+        $('#tercero_id').val(ui.item.id);
+        var tipocartera_id= $('#tipocartera_id').val();
+        
+        $.ajax({
+          url: '/cartera/detalle/'+ui.item.id+'/'+tipocartera_id,
+          type: 'GET',
+          success:function(data){
+            $("#detalleAbonos").empty().html(data);
+          },
+          error:function(data){
+            console.log('Error');
+          }
+        });
+
+      }
+    });
+    $("#buscarTerceroCartera").click(function(){
+      $("#buscarTerceroCartera").val("");
+      $('#tercero_id').val('0');
     });
   });
 //-----------------------------------------------------------------------------------------
@@ -87,11 +115,63 @@ $(document).ready(function(){
  $("#TxtEfectivo").change(function(event) {
     var total=$("#hdnTotal").val();
     var efectivo=$("#TxtEfectivo").val();
-     var efectivoN=Number(efectivo.replace(/[^0-9\.]+/g,""));
+    var efectivoN=Number(efectivo.replace(/[^0-9\.]+/g,""));
     $('#LblCambio').val((efectivoN-total)*100);
  });
- //---------------------------------------------------------------------------------------
+
+  //---------------------------------------------------------------------------------------
  $(function() {
     $('.currency').maskMoney({thousands:',', decimal:'.', allowZero:true, prefix: '$ '});
   })
+ //---------------------------------------------------------------------------------------
+  $("#agregarAbono").click(function(event) {
+
+    var _tercero_id=$('#tercero_id').val();
+    var _deuda=$('#txtDeuda').val();
+    _deuda=Number(_deuda.replace(/[^0-9\.]+/g,""));
+    var _abono=$('#txtAbono').val();
+    _abono=Number(_abono.replace(/[^0-9\.]+/g,""));
+    var _tipocartera_id=$('#tipocartera_id').val();
+    var _estadocartera_id=1;
+    var token=$("input[name=_token]").val();
+    var route='/carteraCrear';
+
+    $.ajax({
+      url: route,
+      headers:{'X-CSRF-TOKEN':token},
+      type: 'post',
+      dataType: 'json',
+      data: {tercero_id: _tercero_id, deuda: _deuda, abono: _abono, tipocartera_id: _tipocartera_id, estadocartera_id: _estadocartera_id},
+      success:function(data){
+        if (data.success='true'){
+        }
+      },
+      error:function(data){
+        console.log("Error");
+      }
+    });
+    
+    $.ajax({
+      url: '/cartera/detalle/'+_tercero_id+'/'+_tipocartera_id,
+      type: 'GET',
+      success:function(data){
+        $("#detalleAbonos").empty().html(data);
+      },
+    error:function(data){
+        console.log('Error');
+      }
+    });
+
+    $.ajax({
+      url: '/cartera/consolidado/'+_tipocartera_id,
+      type: 'GET',
+      success:function(data){
+        $("#consolidadoCartera").empty().html(data);
+      },
+    error:function(data){
+        console.log('Error');
+      }
+    });
+
+  });
 });

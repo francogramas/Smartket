@@ -22,9 +22,6 @@ class CreateFacturaTable extends Migration
             $table->timestamp('fecha');
             $table->integer('tipo')->unsigned()->index();
             $table->integer('estado_id')->unsigned()->index();
-            $table->integer('inventario_id')->unsigned()->default('0');
-            $table->date('vence');
-
 
             $table->timestamps();
             

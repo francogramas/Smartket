@@ -21,7 +21,6 @@
 			</div>
 			{!! Form::hidden('tipo',2,['id'=>'tipo']) !!}
 			{!! Form::hidden('estado_id',1,['id'=>'estado_id']) !!}
-
 		</div>
 	</div>
 	<div class="col-sm-8">
@@ -47,7 +46,6 @@
 				<h5>Producto</h5>
 				{!! Form::hidden('producto_id',null,['id'=>'producto_id','class'=>'form-control']) !!}
 				{!! Form::text('buscarP',null,['id'=>'buscarP','required'=>'required','autocomplete'=>'on','class'=>'form-control','placeholder'=>'Prodcuto...']) !!}
-				<input type="hidden" id="inventario_id" value="0">
 			</div>
 		</div>
 	</div>

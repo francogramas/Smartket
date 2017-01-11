@@ -13,7 +13,6 @@ use SmartKet\http\Requests\producto\createProductoRequest;
 use SmartKet\http\Requests\producto\updateProductoRequest;
 use Session;
 
-
 class productosController extends Controller
 {
 
@@ -25,7 +24,6 @@ class productosController extends Controller
         $productos = productos::select('productos.id','productos.nombre','productos.codigo','categorias.nombre as categorias')->
         join('categorias','categorias.id','=','productos.categoria_id')->
         paginate(10);
-
         return View('/almacen/productos/administrar')->with('categorias',$categorias)->with('productos',$productos);
     }
 
@@ -56,7 +54,7 @@ class productosController extends Controller
         $term = $request->input('term');
         $results = array();
 
-        $queries = inventario::select('inventario.id as inventario_id','productos.id','productos.codigo','productos.nombre','inventario.lote','inventario.cantidad','inventario.costo','inventario.valor')
+        $queries = inventario::select('productos.id','productos.codigo','productos.nombre','inventario.lote','inventario.cantidad','inventario.costo','inventario.valor')
             ->join('productos','inventario.producto_id','=','productos.id')
             ->where('productos.nombre', 'LIKE', '%'.$term.'%')
             ->orWhere('productos.codigo', 'LIKE', '%'.$term.'%')
@@ -64,7 +62,7 @@ class productosController extends Controller
 
         foreach ($queries as $query)
         {
-            $results[] = [ 'id' => $query->id, 'value' => $query->codigo.' || '.$query->nombre, 'valor'=> $query->valor, 'costo'=>$query->costo, 'cantidad'=>$query->cantidad, 'lote'=>$query->lote, 'inventario_id'=>$query->inventario_id];
+            $results[] = [ 'id' => $query->id, 'value' => $query->codigo.' || '.$query->nombre, 'valor'=> $query->valor, 'costo'=>$query->costo, 'cantidad'=>$query->cantidad, 'lote'=>$query->lote];
         }
 
         return Response()->json($results);

@@ -22,8 +22,8 @@ class CreateCarteraTable extends Migration
             $table->double('abono')->default('0');
 
             $table->foreign('tercero_id')->references('id')->on('terceros');
-            $table->foreign('estadocartera_id')->references('id')->on('estadocartera.id');
-            $table->foreign('tipocartera_id')->references('id')->on('tipocartera.id');
+            $table->foreign('estadocartera_id')->references('id')->on('estadocartera');
+            $table->foreign('tipocartera_id')->references('id')->on('tipocartera');
 
             $table->timestamps();
         });

@@ -38,7 +38,6 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('/terceros','almacen\terceros');
 	Route::resource('/categorias','almacen\categoriaController');
 	Route::resource('/productos','almacen\productosController');
-	Route::resource('/cartera','almacen\carteraController');
 
 	
 	Route::get('/inventario/consolidado', function()
@@ -65,6 +64,15 @@ Route::group(['middleware' => 'auth'], function () {
 		return View::make('almacen/inventario/inventarioInicialprint');
 	});
 
+	//---------------------------------------Rutas de la Cartera---------------------------------------------------------
+	Route::resource('/cartera','almacen\carteraController');
+	Route::resource('/carteraAcreedores','almacen\carteraAcreedoresController');
+	Route::resource('/carteraInforme','almacen\carteraInformeController');
+
+
+	Route::get('/cartera/detalle/{tercero_id}/{tipocartera_id}','almacen\carteraController@detalleAbonos');
+	Route::get('/cartera/consolidado/{tipocartera_id}','almacen\carteraController@consolidado');
+	Route::post('/carteraCrear','almacen\carteraController@store');
 });
 
 

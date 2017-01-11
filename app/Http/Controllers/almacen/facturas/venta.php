@@ -25,6 +25,7 @@ class venta extends Controller
 
         $factura_id =factura::where('tipo', 1)
             ->whereIn('estado_id', [1])
+            ->where('users_id',$aut)
             ->first();
 
         $terceros1 = terceros::select('id','nombres','apellido1','apellido2','nit')
@@ -53,7 +54,7 @@ class venta extends Controller
 
     public function create()
     {
-        // esta funcion finaliza la factura y lleva todos los datos de la factura al inventario        
+         // esta funcion finaliza la factura y lleva todos los datos de la factura al inventario        
         $factura = factura::select('id')
         ->where('tipo', 1)
         ->where('estado_id', 1)
@@ -67,9 +68,10 @@ class venta extends Controller
         return redirect()->route('venta.index');
     }
 
+   
     public function store(Request $request)
     {
-        // Esta funcion almacena el detalle de cada una de las facturas, cada producto en el lstado de fatcuras
+       // Esta funcion almacena el detalle de cada una de las facturas, cada producto en el lstado de fatcuras
         $count = factura::where('tipo', 1)
         ->whereIn('estado_id', [1])
         ->where('users_id',Auth::user()->id)
@@ -96,7 +98,7 @@ class venta extends Controller
             $cantidadFactura=DB::table('facturaDetalle')
             ->join('factura','facturadetalle.factura_id','=','factura.id')
             ->where('factura.estado_id','1')
-            ->where('factura.tipo','1')
+            ->where('factura.tipo','3')
             ->where('inventario_id',$request{'inventario_id'})
             ->sum('facturadetalle.cantidad');
 
@@ -126,37 +128,21 @@ class venta extends Controller
         return redirect()->route('venta.index');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+  
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //
     }
+    
 }

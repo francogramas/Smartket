@@ -69,6 +69,21 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                        <li >
+                            <a href="#"><i class="fa fa-money fa-fw"></i>Cartera<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li {{ (Request::is('*venta') ? 'class="active"' : '') }}>
+                                    <a href="{{ url ('/cartera') }}">Deudores</a>
+                                </li>
+                                <li {{ (Request::is('*venta') ? 'class="active"' : '') }}>
+                                    <a href="{{ url ('/carteraAcreedores') }}">Acreedores</a>
+                                </li>
+                                <li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
+                                    <a href="{{ url ('/carteraInforme' ) }}">Consultar</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
                         <li>
                             <a href="#"><i class="glyphicon glyphicon-tasks"></i> Inventario<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">

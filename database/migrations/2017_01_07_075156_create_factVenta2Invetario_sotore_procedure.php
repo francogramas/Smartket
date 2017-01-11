@@ -14,7 +14,8 @@ class CreateFactVenta2InvetarioSotoreProcedure extends Migration
     public function up()
     {
          DB::unprepared('
-           CREATE DEFINER=`root`@`localhost` PROCEDURE `factVenta2Invetario`(_id int, _estadoN int)
+
+        CREATE DEFINER=`root`@`localhost` PROCEDURE `factVenta2Invetario`(_id int, _estadoN int)
 BEGIN
 
 DECLARE _estado_id int;
@@ -61,7 +62,8 @@ elseif _estado_id=1 and _estadoN =4 then
     update factura set estado_id=_estadoN where id like _id;    
 end if;
 END
-        ');
+
+            ');
     }
 
     /**
