@@ -41,10 +41,10 @@
                         <li {{ (Request::is('/') ? 'class="active"' : '') }}>
                             <a href="{{ url ('') }}"><i class="fa fa-dashboard fa-fw"></i> Panel de Trabajo</a>
                         </li>
-                        <li {{ (Request::is('*charts') ? 'class="active"' : '') }}>
+                        <!--li {{ (Request::is('*charts') ? 'class="active"' : '') }}>
                             <a href="{{ url ('charts') }}"><i class="fa fa-bar-chart-o fa-fw"></i> Estadísticas</a>
-                            <!-- /.nav-second-level -->
-                        </li>
+                            <!-- /.nav-second-level>
+                        </li-->
 
                         <!--li {{ (Request::is('*forms') ? 'class="active"' : '') }}>
                             <a href="{{ url ('forms') }}"><i class="fa fa-edit fa-fw"></i> Forms</a>
