@@ -11,6 +11,9 @@ use \SmartKet\models\almacen\facturas\factura;
 use \SmartKet\models\almacen\facturas\facturaDetalle;
 use SmartKet\models\almacen\productos\productos;
 use SmartKet\models\almacen\terceros;
+use SmartKet\models\general\empresa;
+use SmartKet\models\general\ciudades;
+use SmartKet\models\general\estados;
 use Auth;
 use DB;
 use Session;
@@ -76,7 +79,7 @@ class compra extends Controller
             ->where('tipo', 2)
             ->where('estado_id', 1)
             ->where('users_id',$aut)
-            ->first();   
+            ->first();
             DB::statement('call fact2invent('.$factura_id{'id'}.');');
         }
         return redirect()->route('compra.index');
@@ -116,12 +119,12 @@ class compra extends Controller
 
     public function show($id)
     {
-           // esta funcion cancela la factura        
+           // esta funcion cancela la factura
         $factura = factura::select('id')
         ->where('tipo', 2)
         ->where('estado_id', 1)
         ->where('users_id',Auth::user()->id)
-        ->first();  
+        ->first();
 
         if ($factura{'id'}>0)
         {
@@ -140,7 +143,12 @@ class compra extends Controller
      */
     public function edit($id)
     {
-        //
+        $empresa=empresa::select('empresa.razonsocial','empresa.nit','empresa.direccion','empresa.correo','empresa.telefono','ciudades.name as ciudad','estados.name as estado')
+        ->join('ciudades','empresa.ciudad','=','ciudades.id')
+        ->join('estados','ciudades.estados','=','estados.id')
+        ->first();
+         return View('almacen.facturas.facturaCompraImpresaView')
+         ->with('empresa',$empresa);
     }
 
     /**
@@ -164,5 +172,10 @@ class compra extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function imprimir($id)
+    {
+        return View('almacen.facturas.facturaCompraImpresaView');
     }
 }

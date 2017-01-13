@@ -13,11 +13,6 @@
 
 Route::group(['middleware' => 'auth'], function () {
 
-	/*Route::resource('/admin/empresa', 'admin\empresaController');
-	Route::resource('/admin/pacientes', 'admin\pacientesController');
-	Route::resource('/admin/pacienteslistado', 'admin\pacientesListadoController');
-	Route::resource('/admin/segurosmedicos', 'admin\contratacion\seguroMedicoController');
-	Route::resource('/admin/segurosmedicoslistado', 'admin\contratacion\seguroMedicoListadoController');*/
 
 	Route::resource('/admin/empleados', 'admin\contratacion\empleadosController');
 	Route::resource('/admin/empleadoslistado', 'admin\contratacion\empleadoslistadoController');
@@ -27,6 +22,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('/facturas/ventapuntos','facturapuntosController');
 	//facturas de compra
 	Route::resource('/facturas/compra','almacen\facturas\compra');
+	Route::get('/compraimprimir/','almacen\facturas\compra@imprimir');
+
 	//facturas de Cotizacion
 	Route::resource('/facturas/cotizacion','almacen\facturas\cotizacion');
 	//facturas de pedidos
@@ -40,6 +37,11 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('/terceros','almacen\terceros');
 	Route::resource('/categorias','almacen\categoriaController');
 	Route::resource('/productos','almacen\productosController');
+
+	Route::get('/inventario/consolidado', function()
+	{
+		return View::make('almacen/inventario/consolidado');
+	});
 
 	Route::get('/inventario/consolidado', function()
 	{
