@@ -51,15 +51,15 @@
 	</div>
 	<div class="col-sm-6">
 		<div class="row">
-			<div class="col-sm-3">
+			<div class="col-sm-4">
 				<h5>Valor</h5>
 				{!! Form::number('valor',null,['id'=>'valor','required'=>'required','class'=>'form-control','placeholder'=>'$0.00']) !!}
 			</div>
-			<div class="col-sm-3">
+			<div class="col-sm-4">
 				<h5>Lote</h5>
 				{!! Form::text('lote','',['id'=>'lote','required'=>'required','class'=>'form-control','placeholder'=>'0000']) !!}
 			</div>
-			<div class="col-sm-3">
+			<div class="col-sm-4">
 				<h5>Stock</h5>
 				{!! Form::text('stock','1',['id'=>'stock','required'=>'required','class'=>'form-control','placeholder'=>'0']) !!}
 			</div>
@@ -79,16 +79,16 @@
 		<h5><br></h5>
 		<a href={{ route('venta.show','0') }} class="btn btn-danger"> Cancelar </a>	
 	</div>
-	<div class="col-sm-2">
+	<div class="col-sm-3">
 		<h5>Valor Total</h5>
 		<input type="hidden" value="{{ $totales->valorTotal }}" id="hdnTotal">
 		<label id="vrTotal">{{ '$ '.number_format(($totales->valorTotal),2, '.', ',') }}</label>
-	</div>	
-	<div class="col-sm-2">
+	</div>
+	<div class="col-sm-3">
 		<h5>Efectivo</h5>
 		<input type="text" id="TxtEfectivo" class="form-control currency" placeholder="$ 0.00">
 	</div>
-	<div class="col-sm-2">
+	<div class="col-sm-3">
 		<h5>Cambio</h5>
 		<input type="text" class="form-control currency" id="LblCambio" readonly="true" placeholder="$ 0.00" >
 	</div>
@@ -102,7 +102,7 @@
 					<td>Cantidad</td>
 					<td>Código</td>
 					<td>Prodcuto</td>
-					<td>Lote</td>									
+					<td>Lote</td>
 					<td>Valor</td>
 					<td>Valor total</td>
 					<td></td>
@@ -114,7 +114,7 @@
 						<td> {{ $facturaDetalle->cantidad }} </td>
 						<td> {{ $facturaDetalle->codigo }} </td>
 						<td> {{ $facturaDetalle->nombre }} </td>
-						<td> {{ $facturaDetalle->lote }} </td>																		
+						<td> {{ $facturaDetalle->lote }} </td>
 						<td> {{ '$ '.number_format(($facturaDetalle->valor),2, '.', ',') }} </td>
 						<td> {{ '$ '.number_format((($facturaDetalle->valor)*($facturaDetalle->cantidad)),2, '.', ',') }} </td>	
 						<td><a href= "#" class="btn-delete" >[Eliminar]</a></td>

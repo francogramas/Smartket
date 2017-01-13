@@ -8,7 +8,7 @@
 	<div class="col-sm-4">
 		<div class="row">
 			<div class="col-sm-3">
-				<h5>Prefijo</h5>kb
+				<h5>Prefijo</h5>
 				{!! Form::text('prefijo',$factura_id{'prefijo'},['id'=>'prefijo','class'=>'form-control','placeholder'=>'']) !!}
 			</div>
 			<div class="col-sm-3">
@@ -87,9 +87,8 @@
 		<h5><br></h5>
 		<a href={{ route('compra.show','0') }} class="btn  btn-danger"> Cancelar </a>
 	</div>
-	<div class="col-sm-3">
-	</div>
-	<div class="col-sm-3">
+	<div class="col-sm-3"></div>
+	<div class="col-sm-4">
 		<table class="table">
 			<thead>
 				<tr>

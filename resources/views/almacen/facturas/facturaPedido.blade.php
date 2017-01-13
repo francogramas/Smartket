@@ -38,13 +38,13 @@
 </div>
 
 <div class="row">
-	<div class="col-sm-6">
+	<div class="col-sm-12">
 		<div class="row">
-			<div class="col-sm-2">
+			<div class="col-sm-1">
 				<h5>Cantidad</h5>
 				{!! Form::number('cantidad','1',['id'=>'cantidad','required'=>'required','class'=>'form-control','placeholder'=>'Cantidad']) !!}
 			</div>
-			<div class="col-sm-10">
+			<div class="col-sm-11">
 				<h5>Producto</h5>
 				{!! Form::hidden('producto_id',null,['id'=>'producto_id','class'=>'form-control']) !!}
 				{!! Form::text('buscarP',null,['id'=>'buscarP','required'=>'required','autocomplete'=>'on','class'=>'form-control','placeholder'=>'Prodcuto...']) !!}

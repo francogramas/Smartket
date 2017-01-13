@@ -93,7 +93,7 @@
                                 <li {{ (Request::is('*venta') ? 'class="active"' : '') }}>
                                     <a href="{{ url ('/inventario/disponible') }}">Disponible</a>
                                 </li>
-                                <li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
+                                <!-- li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
                                     <a href="{{ url ('/inventario/consolidado' ) }}">Consolidado</a>
                                 </li>
                                 <li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
@@ -101,7 +101,7 @@
                                 </li>
                                 <li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
                                     <a href="{{ url ('/inventario/agotados' ) }}">Agotados</a>
-                                </li>
+                                </li-->
                                 <li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
                                     <a href="{{ url ('/inventario/inicial' ) }}">Inicial</a>
                                 </li>
@@ -124,7 +124,7 @@
                             <a href="{{ url ('/terceros') }}"><i class="fa fa-users fa-fw"></i>Terceros</a>
                         </li>
                         <li>
-                            <a href="{{ url ('/empresa' ) }}"><i class="fa fa-compass fa-fw"></i>Empresa<span class="fa arrow"></span></a>
+                            <a href="{{ url ('/empresa' ) }}"><i class="fa fa-compass fa-fw"></i>Empresa</a>
                         </li>
                 </div>
                 <!-- /.sidebar-collapse -->
