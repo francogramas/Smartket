@@ -31,7 +31,7 @@ Route::group(['middleware' => 'auth'], function () {
 	//facturas de pedidos
 	Route::resource('/facturas/devolucion','almacen\facturas\devolucion');
 	Route::resource('/inventario/disponible','almacen\inventario\inventarioController');
-	Route::get('/','almacen\almacenController@home');
+	Route::resource('/','almacen\almacenController');
 	Route::get('/Admterceros','almacen\almacenController@Admterceros');
 	Route::get('/Admterceros','almacen\almacenController@Admterceros');
 	Route::resource('/terceros','almacen\terceros');
